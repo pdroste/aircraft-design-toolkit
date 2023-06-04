@@ -6,3 +6,5 @@ This toolkit is meant to provide a simple set of functions for designing an airc
 ### Preliminary Sizing
 
 The preliminary sizing tool kit provides a number of functions that estimate suitable combinations of wing loading and thrust/power based on desired aircraft performance.
+Sources for the functions are:
+Aircraft Design: A Systems Engineering Approach. Sadraey, Mohammad H. Wiley, 2013.

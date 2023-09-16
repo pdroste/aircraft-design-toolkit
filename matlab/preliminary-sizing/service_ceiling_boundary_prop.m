@@ -25,4 +25,3 @@ W2P = density_ratio ./ ...
     1.155 / LD_max / eta_p);
 
 end
-

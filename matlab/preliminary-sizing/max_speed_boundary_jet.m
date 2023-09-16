@@ -4,8 +4,8 @@ function [T2W] = ...
 %MAX_SPEED_BOUNDARY_JET calculates the minimum thrust-to-weight ratio at
 % reference conditions for the desired maximum speed at design density.
 % Inputs:
-%   W2S:            array containing wing loading values to
-%                   calculate admissable power loading for [N/m^2]
+%   T2W:            array containing wing loading values to
+%                   calculate admissable thrust-to-weight ratio [N/m^2] for
 %   V_max:          desired maximum speed [m/s]
 %   ref_density:    reference density [kg/m^3]
 %   design_density: design density [kg/m^3]

@@ -27,7 +27,7 @@ C_D_g = C_D_0_TO + K * C_L_TO^2 - cf_ground*C_L_TO;
 exp_TO = exp(eta_prop * design_density * g * C_D_g * TOFL ./  W2S);
 
 % admissable power loading
-W2P = 1 - exp_TO ./ (cf_ground - (cf_ground + C_D_g/C_L_TO) .* exp_TO) .*...
+W2P = (1 - exp_TO) ./ (cf_ground - (cf_ground + C_D_g/C_L_TO) .* exp_TO) .*...
     eta_prop ./ V_TO;
 
 end

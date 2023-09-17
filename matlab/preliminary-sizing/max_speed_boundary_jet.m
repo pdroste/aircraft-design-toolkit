@@ -12,7 +12,7 @@ function [T2W] = ...
 %   C_D0:           lift-independent drag coefficient [-]
 %   K:              induced drag coefficient 1/(pi*AR*e) [-]
 % Outputs:
-%   W2P:            maximum power loading for desired maximum speed [kg/W]
+%   T2W:            thrust-to-weight ratio for desired maximum speed [kg/W]
 
 density_ratio = design_density/ref_density;
 

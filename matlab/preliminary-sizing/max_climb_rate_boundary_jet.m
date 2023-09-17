@@ -1,7 +1,7 @@
 function [T2W] = ...
-    max_climb_rate_boundary_prop(W2S, ROC_max, LD_max, C_D_0, K,...
+    max_climb_rate_boundary_jet(W2S, ROC_max, LD_max, C_D_0, K,...
     design_density)
-%MAX_CLIMB_RATE_BOUNDARY_PROP calculates the maximum power loading for a
+%MAX_CLIMB_RATE_BOUNDARY_PROP calculates the minimum thrust-to-weight for a
 % desired maximum climb rate at the given wing loading
 % Inputs:
 %   W2S:            array containing wing loading values to
@@ -16,6 +16,6 @@ function [T2W] = ...
 %   T2W:            minimum thrust-to-weight ratio for desired maximum
 %                   climb rate [kg/W]
 
-T2W = ROC_max / sqrt(2/design_density/sqrt(C_D_0/K).*W2S) + 1/LD_max;
+T2W = ROC_max ./ sqrt(2/design_density./sqrt(C_D_0/K).*W2S) + 1/LD_max;
 end
 

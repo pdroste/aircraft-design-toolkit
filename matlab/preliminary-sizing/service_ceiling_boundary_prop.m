@@ -14,7 +14,7 @@ function [W2P] = service_ceiling_boundary_prop(W2S, ROC_ceil, LD_max, ...
 %   design_density: design density at ceiling [kg/m^3]
 % Outputs:
 %   W2P:            maximum power loading for desired maximum
-%                   climb rate [kg/W]
+%                   climb rate [N/W]
 
 
 density_ratio = design_density/ref_density;

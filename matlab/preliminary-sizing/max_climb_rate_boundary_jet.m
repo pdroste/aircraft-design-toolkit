@@ -14,8 +14,7 @@ function [T2W] = ...
 %   design_density: design density [kg/m^3]
 % Outputs:
 %   T2W:            minimum thrust-to-weight ratio for desired maximum
-%                   climb rate [kg/W]
-
+%                   climb rate
 T2W = ROC_max ./ sqrt(2/design_density./sqrt(C_D_0/K).*W2S) + 1/LD_max;
 end
 

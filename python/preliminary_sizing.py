@@ -21,7 +21,7 @@ def stall_speed_boundary(stall_speed, c_l_max, design_density):
     :rtype:                     float
     """
 
-    return design_density/2 * stall_speed**2 * c_l_max
+    return design_density / 2 * stall_speed ** 2 * c_l_max
 
 
 def service_ceiling_boundary_jet(wing_loading, roc_ceiling, ld_max, c_d_0, K, reference_density, design_density):
@@ -46,14 +46,14 @@ def service_ceiling_boundary_jet(wing_loading, roc_ceiling, ld_max, c_d_0, K, re
     :rtype:                     np.ndarray
     """
 
-    density_ratio = design_density/reference_density
+    density_ratio = design_density / reference_density
 
-    return roc_ceiling / (density_ratio * np.sqrt(2/design_density/np.sqrt(c_d_0/K)*wing_loading)) + \
-        1/density_ratio/ld_max
+    return roc_ceiling / (density_ratio * np.sqrt(2 / design_density / np.sqrt(c_d_0 / K) * wing_loading)) + \
+        1 / density_ratio / ld_max
 
 
 def service_ceiling_boundary_prop(wing_loading, roc_ceiling, ld_max,
-    c_d_0, K, prop_efficiency, reference_density, design_density):
+                                  c_d_0, K, prop_efficiency, reference_density, design_density):
     """
     Returns the maximum power loading for a given wing loading array for a desired ceiling and residual
     ceiling climb rate.
@@ -63,6 +63,8 @@ def service_ceiling_boundary_prop(wing_loading, roc_ceiling, ld_max,
     :type roc_ceiling:          float
     :param ld_max:              maximum lift-to-drag ratio [-]
     :type ld_max:               float
+    :param c_d_0:               lift-independent drag coefficient [-]
+    :type c_d_0:                float
     :param K:                   induced drag coefficient 1/(pi*AR*e) [-]
     :type K:                    float
     :param prop_efficiency:     propeller efficiency [-]
@@ -84,7 +86,7 @@ def service_ceiling_boundary_prop(wing_loading, roc_ceiling, ld_max,
 
 
 def max_climb_rate_boundary_jet(wing_loading, roc_max, ld_max, c_d_0, K,
-    design_density):
+                                design_density):
     """
     Returns the minimum thrust-to-weight for a desired maximum climb rate for a given wing loading array.
     :param wing_loading:        wing loading [N/m^2]
@@ -103,4 +105,4 @@ def max_climb_rate_boundary_jet(wing_loading, roc_max, ld_max, c_d_0, K,
     :rtype:                     np.ndarray
     """
 
-    return roc_max / np.sqrt(2 / design_density / np.sqrt(c_d_0/K) * wing_loading) + 1 / ld_max
+    return roc_max / np.sqrt(2 / design_density / np.sqrt(c_d_0 / K) * wing_loading) + 1 / ld_max

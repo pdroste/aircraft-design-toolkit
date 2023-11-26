@@ -45,6 +45,7 @@ def fourier_total_lift_coefficient(fourier_coefficients, aspect_ratio):
     """
     return np.pi * fourier_coefficients[0] * aspect_ratio
 
+
 def fourier_induced_drag_coefficient(fourier_coefficients, aspect_ratio):
     """
     Return the total induced drag coefficient of the wing based on the Fourier coefficients of the lift distribution.
@@ -52,9 +53,28 @@ def fourier_induced_drag_coefficient(fourier_coefficients, aspect_ratio):
     :param aspect_ratio:            aspect ratio of the wing
     :return:                        total induced drag coefficient of the wing
     """
-    #create uneven coefficient multiplier
+    # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
 
     # return induced drag coefficient
     return np.pi * aspect_ratio * np.sum(n * fourier_coefficients**2)
+
+
+def fourier_span_efficiency_factor(fourier_coefficients):
+    """
+    Return the span efficiency factor (Oswald factor) of the wing based on the Fourier coefficients of the lift
+    distribution.
+    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution
+    :return:                        span efficiency factor
+    """
+    # create uneven coefficient multiplier
+    n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
+
+    # calculate sum of squared Fourier coefficients
+    delta = np.sum(n*fourier_coefficients**2)
+
+    delta /= fourier_coefficients[0]
+
+    # return span efficiency factor
+    return 1/(1 + delta)
 

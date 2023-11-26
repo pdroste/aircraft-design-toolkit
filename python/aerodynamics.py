@@ -8,6 +8,17 @@ import numpy as np
 
 
 def lifting_line(theta, c_l_alpha, chord, total_alpha, halfspan):
+    """
+    Returns the sine Fourier coefficients produced by analysing the lift distribution across a wing using the method
+    of lifting line theory.
+    :param theta:           polar angles of lift distribution of wing segment
+    :param c_l_alpha:       slopes of lift coefficient curve of wing segments
+    :param chord:           chord length of wing segments
+    :param total_alpha:     total angle of attack of wing segment, including free-stream angle of attack,
+                            geometric twist and segment zero-lift angle of attack
+    :param halfspan:        halfspan of the wing
+    :return:                uneven Fourier coefficients of the lift distribution
+    """
 
     # uneven multiplicator
     n = 2 * np.arange(0, theta.size, 1).reshape((1, theta.size)) + 1
@@ -23,3 +34,4 @@ def lifting_line(theta, c_l_alpha, chord, total_alpha, halfspan):
     circulation = c_l_alpha * chord/8/halfspan * np.sin(theta) * total_alpha
 
     return np.linalg.solve(fourier, circulation)
+

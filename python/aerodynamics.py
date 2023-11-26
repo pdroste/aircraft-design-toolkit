@@ -35,3 +35,12 @@ def lifting_line(theta, c_l_alpha, chord, total_alpha, halfspan):
 
     return np.linalg.solve(fourier, circulation)
 
+
+def fourier_total_lift_coefficient(fourier_coefficients, aspect_ratio):
+    """
+    Return the total lift coefficient of the wing based on the first uneven Fourier coefficient.
+    :param fourier_coefficients:
+    :param aspect_ratio:
+    :return:
+    """
+    return np.pi * fourier_coefficients[0] * aspect_ratio

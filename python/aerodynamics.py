@@ -55,6 +55,7 @@ def fourier_induced_drag_coefficient(fourier_coefficients, aspect_ratio):
     """
     # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
+    n = n.reshape(fourier_coefficients.shape)
 
     # return induced drag coefficient
     return np.pi * aspect_ratio * np.sum(n * fourier_coefficients**2)
@@ -69,6 +70,7 @@ def fourier_span_efficiency_factor(fourier_coefficients):
     """
     # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
+    n = n.reshape(fourier_coefficients.shape)
 
     # calculate sum of squared Fourier coefficients
     delta = np.sum(n*fourier_coefficients**2)
@@ -78,3 +80,16 @@ def fourier_span_efficiency_factor(fourier_coefficients):
     # return span efficiency factor
     return 1/(1 + delta)
 
+def fourier_induced_downwash(fourier_coefficients, theta, free_stream_velocity):
+
+    # create uneven coefficient multiplier
+    n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
+    n = n.reshape(fourier_coefficients.shape)
+
+    # calculate induced downwash
+    w = n * fourier_coefficients * np.sin(n * theta) / np.sin(theta)
+
+    w *= free_stream_velocity
+
+    # return downwash
+    return w

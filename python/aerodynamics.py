@@ -11,13 +11,13 @@ def lifting_line(theta, c_l_alpha, chord, total_alpha, halfspan):
     """
     Return the sine Fourier coefficients produced by analysing the lift distribution across a wing using the method
     of lifting line theory.
-    :param theta:           polar angles of lift distribution of wing segment
-    :param c_l_alpha:       slopes of lift coefficient curve of wing segments
-    :param chord:           chord length of wing segments
+    :param theta:           polar angles of lift distribution of wing segment (excluding 0 and pi) [rad]
+    :param c_l_alpha:       slopes of lift coefficient curve of wing segments [1/rad]
+    :param chord:           chord length of wing segments [m]
     :param total_alpha:     total angle of attack of wing segment, including free-stream angle of attack,
-                            geometric twist and segment zero-lift angle of attack
-    :param halfspan:        halfspan of the wing
-    :return:                uneven Fourier coefficients of the lift distribution
+                            geometric twist and segment zero-lift angle of attack [rad]
+    :param halfspan:        halfspan of the wing [m]
+    :return:                uneven Fourier coefficients of the lift distribution [-]
     """
 
     # uneven multiplicator
@@ -39,9 +39,9 @@ def lifting_line(theta, c_l_alpha, chord, total_alpha, halfspan):
 def fourier_total_lift_coefficient(fourier_coefficients, aspect_ratio):
     """
     Return the total lift coefficient of the wing based on the first uneven Fourier coefficient.
-    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution
-    :param aspect_ratio:            aspect ratio of the wing
-    :return:                        total lift coefficient of the wing
+    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution [-]
+    :param aspect_ratio:            aspect ratio of the wing [-]
+    :return:                        total lift coefficient of the wing [-]
     """
     return np.pi * fourier_coefficients[0] * aspect_ratio
 
@@ -49,9 +49,9 @@ def fourier_total_lift_coefficient(fourier_coefficients, aspect_ratio):
 def fourier_induced_drag_coefficient(fourier_coefficients, aspect_ratio):
     """
     Return the total induced drag coefficient of the wing based on the Fourier coefficients of the lift distribution.
-    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution
-    :param aspect_ratio:            aspect ratio of the wing
-    :return:                        total induced drag coefficient of the wing
+    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution [-]
+    :param aspect_ratio:            aspect ratio of the wing [-]
+    :return:                        total induced drag coefficient of the wing [-]
     """
     # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
@@ -65,8 +65,8 @@ def fourier_span_efficiency_factor(fourier_coefficients):
     """
     Return the span efficiency factor (Oswald factor) of the wing based on the Fourier coefficients of the lift
     distribution.
-    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution
-    :return:                        span efficiency factor
+    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution [-]
+    :return:                        span efficiency factor [-]
     """
     # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
@@ -85,10 +85,10 @@ def fourier_induced_downwash(fourier_coefficients, theta, tas):
     """
     Return the induced downwash distribution of the wing based on the uneven Fourier coefficients of the lift
     distribution.
-    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution
-    :param theta:                   polar angles of lift distribution of wing segment
-    :param tas:                     true airspeed
-    :return:                        downwash distribution of the wing
+    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution [-]
+    :param theta:                   polar angles of lift distribution of wing segment [rad]
+    :param tas:                     true airspeed [m/s]
+    :return:                        downwash distribution of the wing [m/s]
     """
     # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
@@ -106,10 +106,10 @@ def fourier_induced_downwash(fourier_coefficients, theta, tas):
 def elliptic_lift_distribution_center(halfspan, lift_desired, rho, tas):
     """
     Returns the product of lift coefficient and chord length at the center of a wing with elliptical lift distribution.
-    :param halfspan:        half-span of the wing
-    :param lift_desired:    desired total lift of the wing
-    :param rho:             air density
-    :param tas:             true airspeed
-    :return:                product of lift coefficient and chord length at center of the wing
+    :param halfspan:        half-span of the wing [m]
+    :param lift_desired:    desired total lift of the wing [N]
+    :param rho:             air density [kg/m^3]
+    :param tas:             true airspeed [m/s]
+    :return:                product of lift coefficient and chord length at center of the wing [m]
     """
     return lift_desired/(0.5 * halfspan * rho * tas**2 * np.pi)

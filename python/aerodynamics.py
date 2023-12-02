@@ -9,7 +9,7 @@ import numpy as np
 
 def lifting_line(theta, c_l_alpha, chord, total_alpha, halfspan):
     """
-    Returns the sine Fourier coefficients produced by analysing the lift distribution across a wing using the method
+    Return the sine Fourier coefficients produced by analysing the lift distribution across a wing using the method
     of lifting line theory.
     :param theta:           polar angles of lift distribution of wing segment
     :param c_l_alpha:       slopes of lift coefficient curve of wing segments
@@ -81,8 +81,15 @@ def fourier_span_efficiency_factor(fourier_coefficients):
     return 1/(1 + delta)
 
 
-def fourier_induced_downwash(fourier_coefficients, theta, free_stream_velocity):
-
+def fourier_induced_downwash(fourier_coefficients, theta, tas):
+    """
+    Return the induced downwash distribution of the wing based on the uneven Fourier coefficients of the lift
+    distribution.
+    :param fourier_coefficients:    uneven Fourier coefficients of the lift distribution
+    :param theta:                   polar angles of lift distribution of wing segment
+    :param tas:                     true airspeed
+    :return:                        downwash distribution of the wing
+    """
     # create uneven coefficient multiplier
     n = np.arange(0, fourier_coefficients.size, 1) * 2 + 1
     n = n.reshape(fourier_coefficients.shape)
@@ -90,7 +97,7 @@ def fourier_induced_downwash(fourier_coefficients, theta, free_stream_velocity):
     # calculate induced downwash
     w = n * fourier_coefficients * np.sin(n * theta) / np.sin(theta)
 
-    w *= free_stream_velocity
+    w *= tas
 
     # return downwash
     return w
@@ -102,7 +109,7 @@ def elliptic_lift_distribution_center(halfspan, lift_desired, rho, tas):
     :param halfspan:        half-span of the wing
     :param lift_desired:    desired total lift of the wing
     :param rho:             air density
-    :param tas:             true airspeed to calculate lift for
+    :param tas:             true airspeed
     :return:                product of lift coefficient and chord length at center of the wing
     """
     return lift_desired/(0.5 * halfspan * rho * tas**2 * np.pi)

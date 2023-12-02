@@ -80,6 +80,7 @@ def fourier_span_efficiency_factor(fourier_coefficients):
     # return span efficiency factor
     return 1/(1 + delta)
 
+
 def fourier_induced_downwash(fourier_coefficients, theta, free_stream_velocity):
 
     # create uneven coefficient multiplier
@@ -93,3 +94,15 @@ def fourier_induced_downwash(fourier_coefficients, theta, free_stream_velocity):
 
     # return downwash
     return w
+
+
+def elliptic_lift_distribution_center(halfspan, lift_desired, rho, tas):
+    """
+    Returns the product of lift coefficient and chord length at the center of a wing with elliptical lift distribution.
+    :param halfspan:        half-span of the wing
+    :param lift_desired:    desired total lift of the wing
+    :param rho:             air density
+    :param tas:             true airspeed to calculate lift for
+    :return:                product of lift coefficient and chord length at center of the wing
+    """
+    return lift_desired/(0.5 * halfspan * rho * tas**2 * np.pi)

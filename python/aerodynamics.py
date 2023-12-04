@@ -105,7 +105,7 @@ def fourier_induced_downwash(fourier_coefficients, theta, tas):
 
 def elliptic_lift_distribution_center(halfspan, lift_desired, rho, tas):
     """
-    Returns the product of lift coefficient and chord length at the center of a wing with elliptical lift distribution.
+    Return the product of lift coefficient and chord length at the center of a wing with elliptical lift distribution.
     :param halfspan:        half-span of the wing [m]
     :param lift_desired:    desired total lift of the wing [N]
     :param rho:             air density [kg/m^3]
@@ -113,3 +113,23 @@ def elliptic_lift_distribution_center(halfspan, lift_desired, rho, tas):
     :return:                product of lift coefficient and chord length at center of the wing [m]
     """
     return lift_desired/(0.5 * halfspan * rho * tas**2 * np.pi)
+
+
+def aspect_ratio(span, reference_area):
+    """
+    Return the aspect ratio of the wing specified in the function arguments.
+    :param span:            span of the wing [m]
+    :param reference_area:  reference area of the wing [m^2]
+    :return:                aspect ratio [-]
+    """
+    return span**2 / reference_area
+
+
+def taper(inner_chord, outer_chord):
+    """
+    Return the taper of the wing specified in the function arguments.
+    :param inner_chord:     inner chord of the wing [m]
+    :param outer_chord:     outer chord of the wing [m]
+    :return:                taper [-]
+    """
+    return outer_chord / inner_chord
